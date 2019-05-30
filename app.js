@@ -7,13 +7,13 @@ doc.shift();
 
 doc.forEach(elem => {
     elem = elem.split(',')
-    let obj = `{"name":"${elem[0]}","course":"${elem[1]}"}`
+    let obj = `{'name':'${elem[0]}','course':'${elem[1]}'}`
     jsonDoc.push(obj);
 });
 
 
-let json = `{"mentors":${jsonDoc}}`
+let json = `{'mentors':${jsonDoc}}`
 console.log(json, typeof(json))
 json = JSON.stringify(json);
 console.log(json, typeof(json))
-    //fs.writeFileSync('./file/mentores.json', json, 'utf8');
+fs.writeFileSync('./file/mentores.json', json, 'utf8');

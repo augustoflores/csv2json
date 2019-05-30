@@ -1,21 +1,15 @@
 const fs = require('fs');
+var jsonFormat = require('./node_modules/json-format');
 
-let jsonDoc = [];
-let doc = fs.readFileSync('./file/mentorsList.csv', 'utf8');
-doc = doc.split("\n");
-doc.shift();
+let arrMentores = [];
+let csv = fs.readFileSync('./file/mentorsList.csv', 'utf8');
+csv = csv.split("\n");
+csv.shift();
 
-
-//utilizar map
-doc.forEach(elem => {
+arrMentores =csv.map(elem => {
     elem = elem.split(',')
-    let [mentorName, courseName] = elem
-    let obj = { "name": elem[0], "course": elem[1] } //llaves desde el archivo
-    jsonDoc.push(obj);
-});
+    return { "name": elem[0], "course": elem[1] } 
+})
 
-
-let json = { "mentors": jsonDoc }
-json = JSON.stringify(json, '\n');
-console.log(json, typeof(json))
-fs.writeFileSync('./file/mentores.json', json);
+let json = { "mentors": arrMentores }
+fs.writeFileSync('./file/mentores.json', jsonFormat(json));
